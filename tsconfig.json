@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    /* Diretórios */
+    "rootDir": "src",
+    "outDir": "dist",
+
+    /* Linguagem e alvo */
+    "target": "ES2021",
+    "module": "CommonJS",
+    "lib": ["ES2021"],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Tipagem e validação */
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
+
+    /* Suporte Node */
+    "types": ["node"],
+
+    /* Mapas de código e debug */
+    "sourceMap": true,
+
+    /* Compatibilidade moderna */
+    "allowJs": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
