@@ -1,4 +1,5 @@
 import pino from "pino";
+import dayjs from "dayjs";
 
 export const logger = pino({
   transport: {
@@ -6,4 +7,5 @@ export const logger = pino({
     options: { colorize: true },
   },
   level: process.env.LOG_LEVEL || "info",
+  timestamp: () => `, time: ${dayjs().format()}`,
 });

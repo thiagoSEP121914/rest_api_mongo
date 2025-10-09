@@ -1,5 +1,6 @@
 import express from "express";
 import { config } from "dotenv";
+import { db } from "./config/DataBase";
 
 config();
 const app = express();
