@@ -3,6 +3,6 @@ import ProductController from "../features/products/ProductController";
 
 const authRouter = Router();
 
-authRouter.use("/", ProductController);
+authRouter.use("/products", ProductController);
 
 export default authRouter;

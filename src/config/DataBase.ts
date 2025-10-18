@@ -1,23 +1,25 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import { config } from "dotenv";
 import { logger } from "../utils/logger";
 
 config();
-
-async function connectToDataBase(): Promise<void> {
+export async function connectToDataBase(): Promise<void> {
   const dbUri = process.env.MONGO_URI;
 
   if (!dbUri) throw new Error("Database URI não definida no .env");
-
-  if (mongoose.connection.readyState !== 0) return;
+  if (mongoose.connection.readyState === 1) return;
 
   try {
-    await mongoose.connect(dbUri);
-    logger.info("Data base connected!!");
+    await mongoose.connect(dbUri, {
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
+    logger.info("Database connected!!");
   } catch (error: any) {
-    logger.error("Was not possible to connect to MongoDB", error);
+    logger.error("Erro na conexão:", error.message);
     setTimeout(() => connectToDataBase(), 5000);
   }
 }
 
-export const db = connectToDataBase();
+// export mongoose itself para health check
+export { mongoose };
