@@ -1,6 +1,5 @@
 import { timeStamp } from "console";
 import { config } from "dotenv";
-import { REQUEST_TIMEOUT } from "http-status-codes";
 import { trim } from "lodash";
 import { Document, model, Schema } from "mongoose";
 import { string } from "zod";

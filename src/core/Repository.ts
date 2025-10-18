@@ -1,4 +1,4 @@
-import { Document, Model, Types } from "mongoose";
+import mongoose, { Document, Model, Types } from "mongoose";
 
 export default abstract class Repository<T extends Document> {
   protected model: Model<T>;
@@ -20,13 +20,15 @@ export default abstract class Repository<T extends Document> {
     return this.model.findById(id);
   }
 
-  async update(object: T & { _id: string }): Promise<T> {
-    return this.model
-      .updateOne({ _id: object._id }, { $set: object }, { upsert: true })
-      .then(() => object);
+  async update(
+    object: Partial<T> & { _id: mongoose.Types.ObjectId }
+  ): Promise<T | null> {
+    const id = object._id;
+
+    return this.model.findByIdAndUpdate(id, object, { new: true }).exec();
   }
 
-  async delete(id: string): Promise<T | null> {
+  async delete(id: mongoose.Types.ObjectId): Promise<T | null> {
     return this.model.findByIdAndDelete(id);
   }
 }

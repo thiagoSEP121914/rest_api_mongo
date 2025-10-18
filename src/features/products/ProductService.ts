@@ -8,13 +8,12 @@ export default class ProductService {
     this.productRepository = productRepository;
   }
 
-  // ProductService.ts
   async findAll(): Promise<ProductDocument[]> {
     try {
       return this.productRepository.findAll();
     } catch (err) {
       console.error("Erro no ProductService.findAll:", err);
-      throw err; // relança para o controller pegar
+      throw err;
     }
   }
 
