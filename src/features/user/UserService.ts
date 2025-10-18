@@ -29,6 +29,15 @@ export default class UserService {
     }
   }
 
+  async findByEmail(email: string): Promise<UserDocument | null> {
+    try {
+      return this.userRepository.findByEmail(email);
+    } catch (error) {
+      logger.error(`Erro ao buscar email : ${email}`);
+      throw error;
+    }
+  }
+
   async create(user: UserDocument): Promise<UserDocument> {
     try {
       return await this.userRepository.create(user);
