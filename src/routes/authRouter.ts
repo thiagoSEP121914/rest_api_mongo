@@ -5,5 +5,4 @@ import ProductController from "../features/products/ProductController";
 const authRouter = Router();
 
 authRouter.use("/products", authenticateToken, ProductController);
-
 export default authRouter;

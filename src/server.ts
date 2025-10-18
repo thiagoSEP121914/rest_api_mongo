@@ -1,7 +1,8 @@
 import express, { Router } from "express";
 import { config } from "dotenv";
 import { connectToDataBase, mongoose } from "./config/DataBase";
-import authRouter from "./routes/AuthRouter";
+import authRouter from "./routes/authRouter";
+import unauthRouter from "./routes/unAuthRouter";
 
 config();
 connectToDataBase();
@@ -10,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/api", authRouter);
-
+app.use("/", unauthRouter);
 app.get("/", (req, res) => {
   res.send("Hello, World!");
 });

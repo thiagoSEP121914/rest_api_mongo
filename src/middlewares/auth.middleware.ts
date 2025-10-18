@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-const SECRET_KEY = process.env.JWT_SECRET || "123";
+function getSecretKey(): string {
+  const key = process.env.JWT_SECRET;
+  if (!key) throw new Error("JWT não foi definida no env");
+  return key;
+}
 
 export function authenticateToken(
   req: Request,
@@ -16,8 +20,7 @@ export function authenticateToken(
   }
 
   try {
-    const user = jwt.verify(token, SECRET_KEY);
-    // Para o TypeScript reconhecer `req.user`, podemos fazer:
+    const user = jwt.verify(token, getSecretKey());
     (req as any).user = user;
     next();
   } catch (err) {

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import UserService from "../user/UserService";
 import { UserDocument } from "../user/user.model";
+import UserRepository from "../user/UserRepository";
 
 interface IloginResponse {
   token: string;
